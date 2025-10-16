@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DCI Indonesia: Rangkuman Visi & Strategi</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --primary-dark: #667eea;
+            --primary-light: #764ba2;
+            --accent-light: #a589e8;
+            --white-glass: rgba(255, 255, 255, 0.95);
+            --white-semi: rgba(255, 255, 255, 0.1);
+            --text-dark: #1a1a2e;
+            --text-light: #666;
+        }
+
+        html, body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--primary-gradient);
+            min-height: 100vh;
+            color: var(--text-dark);
+            scroll-behavior: smooth;
+        }
+
+        body.panel-open {
+            overflow: hidden;
+        }
+
+        /* ===== HEADER ===== */
+        header {
+            text-align: center;
+            padding: 3rem 1.5rem 2rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .header-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #fff 0%, #e6e6ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header-emoji {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        .header-desc {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.05rem;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* ===== MENU GRID ===== */
+        .menu-section {
+            padding: 2rem 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+        }
+
+        .menu-grid {
+            display: grid;
+            gap: 1.5rem;
+            grid-template-columns: 1fr;
+            margin-bottom: 3rem;
+        }
+
+        @media (min-width: 768px) {
+            .menu-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .menu-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .menu-card {
+            background: var(--white-glass);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .menu-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(255, 255, 255, 0.4);
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.2);
+        }
+
+        .menu-card:hover::before {
+            opacity: 1;
+        }
+
+        .menu-card.active {
+            background: var(--primary-gradient);
+            color: white;
+            border-color: transparent;
+        }
+
+        .menu-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.75rem;
+            display: block;
+        }
+
+        .menu-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .menu-card.active .menu-title {
+            color: white;
+        }
+
+        .menu-desc {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            line-height: 1.5;
+        }
+
+        .menu-card.active .menu-desc {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* ===== PANEL ===== */
+        .panel-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            z-index: 100;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .panel-overlay.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .panel {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--white-glass);
+            backdrop-filter: blur(10px);
+            overflow-y: auto;
+            z-index: 101;
+            animation: slideInRight 0.4s ease;
+        }
+
+        .panel.active {
+            display: flex;
+            flex-direction: column;
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+            }
+            to {
+                transform: translateX(0);
+            }
+        }
+
+        @media (min-width: 768px) {
+            .panel {
+                width: 75%;
+                max-width: 900px;
+                border-radius: 1rem 0 0 1rem;
+                box-shadow: -10px 0 40px rgba(102, 126, 234, 0.2);
+            }
+        }
+
+        .panel-header {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 2rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-shrink: 0;
+        }
+
+        .panel-header-icon {
+            font-size: 2rem;
+        }
+
+        .panel-header-content h2 {
+            font-size: 1.8rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .panel-header-desc {
+            font-size: 0.9rem;
+            opacity: 0.95;
+        }
+
+        .panel-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 2rem 1.5rem;
+        }
+
+        .panel-footer {
+            display: flex;
+            gap: 1rem;
+            padding: 1.5rem;
+            flex-shrink: 0;
+            background: rgba(0, 0, 0, 0.02);
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .btn {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .btn-back {
+            background: rgba(102, 126, 234, 0.1);
+            color: var(--primary-dark);
+            border: 1px solid var(--primary-dark);
+        }
+
+        .btn-back:hover {
+            background: var(--primary-dark);
+            color: white;
+        }
+
+        .btn-top {
+            background: var(--primary-gradient);
+            color: white;
+        }
+
+        .btn-top:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        /* ===== CONTENT STYLING ===== */
+        .section {
+            margin-bottom: 2.5rem;
+        }
+
+        .section-number {
+            display: inline-block;
+            background: var(--primary-gradient);
+            color: white;
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+
+        .section h3 {
+            font-size: 1.4rem;
+            color: var(--primary-dark);
+            margin-bottom: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .section p {
+            line-height: 1.7;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.08), rgba(118, 75, 162, 0.08));
+            border-left: 4px solid var(--primary-dark);
+            padding: 1rem 1.25rem;
+            border-radius: 0.5rem;
+            margin: 1rem 0;
+            font-weight: 500;
+        }
+
+        .quote-box {
+            background: var(--white-semi);
+            border-left: 4px solid var(--accent-light);
+            padding: 1.25rem;
+            border-radius: 0.5rem;
+            margin: 1.5rem 0;
+            font-style: italic;
+            color: var(--text-dark);
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        .list-item {
+            margin-left: 1.5rem;
+            margin-bottom: 0.75rem;
+            line-height: 1.6;
+        }
+
+        .list-item::before {
+            content: '';
+            color: var(--primary-dark);
+            font-weight: bold;
+            margin-right: 0.75rem;
+            margin-left: -1.5rem;
+        }
+
+        /* ===== GLOSSARY TABLE ===== */
+        .glossary-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            overflow-x: auto;
+        }
+
+        .glossary-table th {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 0.75rem;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .glossary-table td {
+            padding: 0.75rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .glossary-table tr:hover {
+            background: rgba(102, 126, 234, 0.05);
+        }
+
+        .glossary-term {
+            font-weight: 600;
+            color: var(--primary-dark);
+        }
+
+        .glossary-note {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            font-style: italic;
+        }
+
+        /* ===== NAV DOTS ===== */
+        .nav-dots {
+            position: fixed;
+            right: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 99;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .nav-dots.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .nav-dot {
+            width: 0.75rem;
+            height: 0.75rem;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid white;
+        }
+
+        .nav-dot.active {
+            background: white;
+            transform: scale(1.3);
+        }
+
+        @media (max-width: 1200px) {
+            .nav-dots {
+                display: none;
+            }
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            text-align: center;
+            padding: 2rem 1.5rem;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* ===== SCROLLBAR STYLE ===== */
+        .panel-content::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .panel-content::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        .panel-content::-webkit-scrollbar-thumb {
+            background: var(--primary-gradient);
+            border-radius: 4px;
+        }
+
+        .panel-content::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-dark);
+        }
+
+        /* ===== MOBILE ADJUSTMENTS ===== */
+        @media (max-width: 767px) {
+            .header-title {
+                font-size: 1.8rem;
+            }
+
+            .header-emoji {
+                font-size: 2rem;
+            }
+
+            .panel-header {
+                padding: 1.5rem 1rem;
+            }
+
+            .panel-header-content h2 {
+                font-size: 1.3rem;
+            }
+
+            .panel-content {
+                padding: 1.5rem 1rem;
+            }
+
+            .section h3 {
+                font-size: 1.2rem;
+            }
+
+            .panel-footer {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="header-emoji"></div>
+        <h1 class="header-title">DCI Indonesia: Rangkuman Visi & Strategi</h1>
+        <p class="header-desc">Memahami filosofi bisnis, strategi efisiensi, dan visi masa depan dalam transformasi digital Indonesia</p>
+    </header>
+
+    <!-- MENU GRID -->
+    <section class="menu-section">
+        <div class="menu-grid" id="menuGrid"></div>
+    </section>
+
+    <!-- PANEL OVERLAY -->
+    <div class="panel-overlay" id="panelOverlay"></div>
+
+    <!-- PANEL KONTEN -->
+    <div class="panel" id="contentPanel">
+        <div class="panel-header">
+            <span class="panel-header-icon" id="panelIcon"></span>
+            <div class="panel-header-content">
+                <h2 id="panelTitle"></h2>
+                <p class="panel-header-desc" id="panelDesc"></p>
+            </div>
+        </div>
+
+        <div class="panel-content" id="panelContent"></div>
+
+        <div class="panel-footer">
+            <button class="btn btn-back" onclick="closePanel()"> Kembali ke Menu</button>
+            <button class="btn btn-top" onclick="scrollPanelTop()"> Ke Atas</button>
+        </div>
+    </div>
+
+    <!-- NAV DOTS -->
+    <div class="nav-dots" id="navDots"></div>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; <span id="yearDynamic"></span> DCI Indonesia. Rangkuman konsep dan strategi bisnis.</p>
+    </footer>
+
+    <script>
+        const menuData = [
+            {
+                id: 'cover',
+                icon: '',
+                title: 'Sampul & Ikhtisar',
+                desc: 'Ringkas sumber & premis utama',
+                content: `
+                    <div class="section">
+                        <div class="section-number">0</div>
+                        <h3>Sampul & Ikhtisar</h3>
+                        <p><strong>Sumber:</strong> Rangkuman Pak Toto Nugroho, Pendiri DCI Indonesia (Data Center Tier IV pertama di Asia Tenggara).</p>
+                        <p><strong>Narasumber:</strong> Pak Toto Nugroho, Pendiri & Visioner DCI Indonesia.</p>
+                        <p><strong>Tema:</strong> Memahami filosofi bisnis berbasis empati, strategi operasional efisien, dan visi teknologi masa depan dalam konteks transformasi digital nasional.</p>
+                        <p><strong>Durasi/Format:</strong> Rangkuman komprehensif dari wawancara & pandangan strategis.</p>
+                        
+                        <div class="highlight-box" style="margin-top: 1.5rem;">
+                            <strong>Insight Inti:</strong> Bisnis yang baik harus lahir dari empati dan keinginan membantu orang lain. DCI bukan hanya tentang data center, tetapi tentang kedaulatan digital nasional dan penciptaan nilai jangka panjang.
+                        </div>
+
+                        <div class="quote-box">
+                            "Kalau perusahaan ini seperti negara, saya ingin jadi Brunei, bukan India" — Pak Toto Nugroho
+                        </div>
+
+                        <p style="margin-top: 1.5rem; font-size: 0.95rem; color: var(--text-light);"><strong>Catatan:</strong> Rangkuman ini menggabungkan filosofi, strategi bisnis, dan pandangan futuristik dari narasumber tunggal—mencerminkan visi holistik DCI Indonesia.</p>
+                    </div>
+                `
+            },
+            {
+                id: 'founding',
+                icon: '',
+                title: 'Awal Berdirinya DCI',
+                desc: 'Latar belakang, motivasi, dan visi pertama',
+                content: `
+                    <div class="section">
+                        <div class="section-number">1</div>
+                        <h3>Awal Berdirinya DCI Indonesia</h3>
+                        <p>Setelah pensiun dari Sigma dan Telkom, Pak Toto tergerak membangun data center di Indonesia karena melihat data nasional tersimpan di luar negeri, khususnya Singapura.</p>
+                        
+                        <div class="highlight-box">
+                            <strong>Motivasi Utama:</strong> Memastikan data nasional tersimpan di dalam negeri demi kedaulatan digital.
+                        </div>
+
+                        <p><strong>Tahun Pendirian:</strong> 2011</p>
+                        <p><strong>Pencapaian Awal:</strong> Membangun DCI sebagai data center tier IV pertama di Asia Tenggara dengan investasi besar untuk kualitas tertinggi.</p>
+
+                        <div class="quote-box">
+                            "Saya ingin memastikan infrastruktur digital nasional dikelola dari dalam, bukan di luar."
+                        </div>
+
+                        <p><strong>Visi Jangka Panjang:</strong></p>
+                        <div class="list-item">Membangun infrastruktur berstandar global</div>
+                        <div class="list-item">Efisien dan berskala besar (kini 8,5 hektar; target hingga 300 MW)</div>
+                        <div class="list-item">Menjadi tulang punggung ekosistem digital Indonesia</div>
+
+                        <p style="margin-top: 1.5rem; font-size: 0.95rem; color: var(--text-light);"><strong>Konteks:</strong> Inisiatif ini lahir dari kesadaran bahwa kedaulatan digital adalah pilar penting bagi stabilitas nasional di era modern.</p>
+                    </div>
+                `
+            },
+            {
+                id: 'efficiency',
+                icon: '',
+                title: 'Strategi Efisiensi & Produktivitas',
+                desc: 'Model operasional & filosofi resource',
+                content: `
+                    <div class="section">
+                        <div class="section-number">2</div>
+                        <h3>Strategi Efisiensi dan Produktivitas</h3>
+                        
+                        <p><strong>Angka Efisiensi:</strong> DCI hanya memiliki 161 karyawan dengan revenue per headcount > USD 1 juta/tahun, menunjukkan efisiensi luar biasa.</p>
+
+                        <div class="highlight-box">
+                            <strong>Filosofi Organisasi:</strong> "Kalau perusahaan ini seperti negara, saya ingin jadi Brunei, bukan India" — lebih sedikit orang tapi sangat produktif.
+                        </div>
+
+                        <p><strong>Strategi Implementasi:</strong></p>
+                        <div class="list-item">Investasi besar di otomasi dan IoT untuk konsistensi kualitas</div>
+                        <div class="list-item">Rekrutmen talent berkualitas tinggi dengan training komprehensif</div>
+                        <div class="list-item">Sistem manajemen yang efisien dan transparan</div>
+
+                        <p style="margin-top: 1.5rem;"><strong>Filosofi Teknologi & SDM:</strong></p>
+                        <div class="quote-box">
+                            Automation dan teknologi dianggap sebagai alat bantu sumber daya manusia, bukan pengganti. Investasi terbesar adalah pada orang-orang berkualitas.
+                        </div>
+
+                        <p><strong>Hasil Ukur:</strong></p>
+                        <div class="list-item">EBITDA margin: 67%</div>
+                        <div class="list-item">Net Profit Margin: 42%</div>
+                        <div class="list-item">Jauh di atas rata-rata industri (40–50%)</div>
+
+                        <p style="margin-top: 1.5rem; font-size: 0.95rem; color: var(--text-light);"><strong>Implikasi:</strong> Model ini membuktikan bahwa efisiensi ekstrem bukan hanya mungkin, tetapi sustainable dan profitable dalam jangka panjang.</p>
+                    </div>
+                `
+            },
+            {
+                id: 'competitive',
+                icon: '',
+                title: 'Keunggulan Kompetitif',
+                desc: 'Diferensiasi & posisi pasar DCI',
+                content: `
+                    <div class="section">
+                        <div class="section-number">3</div>
+                        <h3>Competitive Advantage (Kelebihan Kompetitif)</h3>
+                        
+                        <p><strong>1. Kecepatan Pembangunan:</strong> DCI mampu menyelesaikan data center dalam 1 tahun (pasar umumnya 1–2 tahun).</p>
+
+                        <div class="highlight-box">
+                            Waktu yang lebih singkat berarti ROI lebih cepat dan agility lebih tinggi dalam merespons permintaan pasar.
+                        </div>
+
+                        <p style="margin-top: 1.5rem;"><strong>2. Capital Efficiency:</strong> Hanya membangun setelah ada kontrak klien, bukan spekulatif.</p>
+                        <p style="margin-top: 1rem;"><strong>3. Profitabilitas Tertinggi di Industri:</strong></p>
+                        <div class="list-item">EBITDA margin: 67%</div>
+                        <div class="list-item">Net Profit Margin: 42%</div>
+                        <div class="list-item">Jauh melampaui rata-rata industri</div>
+
+                        <p style="margin-top: 1.5rem;"><strong>4. Kesiapan Menghadapi Price War:</strong> Efisiensi operasional dan kualitas matang memungkinkan DCI bersaing dengan pemain global.</p>
+
+                        <div class="quote-box">
+                            Keunggulan bukan semata harga, tapi kombinasi kecepatan, kualitas, dan efisiensi yang sulit ditiru.
+                        </div>
+
+                        <p style="margin-top: 1.5rem;"><strong>Ringkas Positioning:</strong></p>
+                        <div class="list-item">Pemimpin pasar dalam kecepatan & efisiensi</div>
+                        <div class="list-item">Standar kualitas global dengan biaya lokal kompetitif</div>
+                        <div class="list-item">Track record profitable sejak awal operasi</div>
+
+                        <p style="margin-top: 1.5rem; font-size: 0.95rem; color: var(--text-light);"><strong>Kesimpulan:</strong> DCI tidak hanya bersaing di cost, tetapi memimpin di value creation secara holistik.</p>
+                    </div>
+                `
+            },
+            {
+                id: 'philosophy',
+                icon: '',
+                title: 'Filosofi & Prinsip Bisnis',
+                desc: 'Fondasi nilai & etika bisnis DCI',
+                content: `
+                    <div class="section">
+                        <div class="section-number">4</div>
+                        <h3>Filosofi & Prinsip Bisnis</h3>
+                        
+                        <p><strong>Background Pribadi:</strong> Tidak bercita-cita jadi pengusaha; awalnya programmer yang menemukan kepuasan saat membantu orang lewat teknologi.</p>
+
+                        <div class="highlight-box">
+                            <strong>Prinsip Dasar Bisnis DCI:</strong> "Bisnis yang baik harus lahir dari empati dan keinginan membantu orang lain."
+                        </div>
+
+                        <p style="margin-top: 1.5rem;"><strong>Pilar Filosofi:</strong></p>
+                        <div class="list-item"><strong>Fokus pada Karya & Kebebasan:</strong> Bukan sekadar uang, tetapi dampak & kesempatan berinovasi</div>
+                        <div class="list-item"><strong>Value Creation First:</strong> Bisnis yang bermanfaat pasti menghasilkan uang sebagai bentuk apresiasi nilai</div>
+                        <div class="list-item"><strong>Sustainability over Growth Hype:</strong> Mengutamakan keberlanjutan dibanding pertumbuhan instan seperti "unicorn"</div>
+
+                        <div class="quote-box">
+                            Uang adalah hasil, bukan tujuan. Jika kamu fokus pada value dan membantu orang, uang akan mengikuti.
+                        </div>
+
+                        <p style="margin-top: 1.5rem;"><strong>Manifestasi dalam Operasi DCI:</strong></p>
+                        <div class="list-item">Kualitas infrastruktur prioritas utama (tier IV)</div>
+                        <div class="list-item">Hubungan jangka panjang dengan klien, bukan transaksi sekali</div>
+                        <div class="list-item">Investasi berkelanjutan di R&D dan teknologi</div>
+                        <div class="list-item">Komitmen pada kedaulatan digital nasional</div>
+
+                        <p style="margin-top: 1.5rem; font-size: 0.95rem; color: var(--text-light);"><strong>Impak Filosofi:</strong> Ini yang membedakan DCI dari pure profit-maximizer—membangun loyalitas, kepercayaan, dan dampak jangka panjang.</p>
+                    </div>
+                `
+            },
+            {
+                id: 'startup-investor',
+                icon: '',
+                title: 'Pandangan Startup & Investor',
+                desc: 'Kritik & prinsip investasi jangka panjang',
+                content: `
+                    <div class="section">
+                        <div class="section-number">5</div>
+                        <h3>Pandangan tentang Startup & Investor</h3>
+                        
+                        <p><strong>Kritik terhadap Startup Modern:</strong> Banyak startup hanya mengejar valuasi dan funding, bukan profitabilitas.</p>
+
+                        <div class="highlight-box">
+                            <strong>Posisi Pak Toto:</strong> Menekankan pentingnya bisnis yang profitable dan berkelanjutan sejak awal, bukan mengandalkan "exit" di masa depan.
+                        </div>
+
+                        <p style="margin-top: 1.5rem;"><strong>Kritik Detail:</strong></p>
+                        <div class="list-item">Fokus pada metrik vanity (user, DAU) tanpa unit economics jelas</div>
+                        <div class="list-item">Akumulasi kerugian besar dengan harapan "scale and profit later"</div>
+                        <div class="list-item">Ketergantungan pada investor berikutnya alih-alih fundamental bisnis</div>
+
+                        <p style="margin-top: 1.5rem;"><strong>Prinsip Investasi Pak Toto (Sebagai Investor):</strong></p>
+                        <div class="list-item"><strong>1. Sustainability bisnis</strong> — model revenue jelas & positif</div>
+                        <div class="list-item"><strong>2. Kemampuan growth realistis</strong> — bukan proyeksi fantastis</div>
+                        <div class="list-item"><strong>3. Market reach & fundamental perusahaan</strong> — potensi jangka panjang solid</div>
+
+                        <p style="margin-top: 1.5rem;"><strong>Contoh Investasi:</strong> Google</p>
+                        <p>Alasan: Memahami potensi data dan fundamental jangka panjang (bukan hanya teknologi, tapi model bisnis revolusioner).</p>
+
+                        <div class="quote-box">
+                            Investasi terbaik adalah pada bisnis yang profitable, sustainable, dan menciptakan value nyata—bukan hype.
+                        </div>
+
+                        <p style="margin-top: 1.5rem; font-size: 0.95rem; color: var(--text-light);"><strong>Takeaway:</strong> Pendekatan investor Pak Toto adalah konservatif namun visioner—mengutamakan fundamental, bukan hype cycle.</p>
+                    </div>
+                `
+            },
+            {
+                id: 'ai-future',
+                icon: '',
+                title: 'AI, Quantum & Teknologi Masa Depan',
+                desc: 'Visi transformasi teknologi 3-5 tahun ke depan',
+                content: `
+                    <div class="section">
+                        <div class="section-number">6</div>
+                        <h3>Pandangan terhadap AI, Quantum, & Teknologi Masa Depan</h3>
+                        
+                        <h4 style="margin-top: 1.5rem; color: var(--primary-dark); font-size: 1.1rem;"> Artificial Intelligence (AI)</h4>
+                        
+                        <p><strong>Prospek AI:</strong> AI akan menjadi tools produktivitas besar di berbagai industri—kesehatan, keuangan, manufaktur.</p>
+
+                        <div class="highlight-box">
+                            <strong>Perkembangan AI akan seperti "mobile wave":</strong> Cepat, eksponensial, dan mengubah segalanya dalam 3 tahun.
+                        </div>
+
+                        <p style="margin-top: 1rem;"><strong>Tantangan Utama:</strong> Manusia harus belajar menggunakan AI sebagai alat, bukan pesaing.</p>
+
+                        <div class="quote-box">
+                            "Kalau kamu bertahan dengan skill lama, kamu akan tergantikan."
+                        </div>
+
+                        <p style="margin-top: 1.5rem;"><strong>Implikasi untuk SDM:</strong></p>
+                        <div class="list-item">Upskilling & reskilling bukan opsional</div>
+                        <div class="list-item">Produktivitas akan meningkat drastis untuk yang adopt AI</div>
+                        <div class="list-item">Gap ekonomi akan membesar antara adopter & non-adopter</div>
+
+                        <h4 style="margin-top: 2rem; color: var(--primary-dark); font-size: 1.1rem;"> Quantum Computing</h4>
+                        
+                        <p><strong>Status Saat Ini:</strong> Masih dalam tahap R&D dan prototipe, belum komersial.</p>
+
+                        <p><strong>Dampak Potensial (Jika Terwujud):</strong> Akan mengubah sistem enkripsi (cryptography) secara total.</p>
+
+                        <div class="highlight-box">
+                            <strong>Implikasi Keamanan:</strong> Bitcoin, blockchain, dan sistem perbankan yang mengandalkan enkripsi tradisional akan terancam.
+                        </div>
+
+                        <p style="margin-top: 1rem;"><strong>Respons Industri:</strong> Muncul riset baru tentang quantum-resistant encryption untuk mengantisipasi skenario ini.</p>
+
+                        <h4 style="margin-top: 2rem; color: var(--primary-dark); font-size: 1.1rem;"> Humanoid Robot</h4>
+                        
+                        <p><strong>Prospek Deployment:</strong> Akan berkembang di industri berisiko tinggi—tambang, manufaktur, pembangunan.</p>
+
+                        <p><strong>Batasan:</strong> Tidak semua bidang cocok. Fokus pada efisiensi dan keselamatan kerja manusia.</p>
+
+                        <div class="quote-box">
+                            AI + Humanoid = transformasi besar tenaga kerja fisik dan intelektual. Adaptasi adalah kunci.
+                        </div>
+
+                        <p style="margin-top: 1rem; font-size: 0.95rem; color: var(--text-light);"><strong>Kesimpulan Teknologi:</strong> Transformasi akan massive, cepat, dan memerlukan kesiapan mental & skill dari semua lapisan masyarakat.</p>
+                    </div>
+                `
+            },
+            {
+                id: 'energy',
+                icon: '',
+                title: 'Energi: Next Big Thing',
+                desc: 'Tantangan & solusi daya untuk data center & AI',
+                content: `
+                    <div class="section">
+                        <div class="section-number">7</div>
+                        <h3>Energi sebagai "Next Big Thing"</h3>
+                        
+                        <p><strong>Konteks:</strong> DCI juga berfokus pada energi dan efisiensi daya—karena AI dan data center sangat bergantung pada listrik.</p>
+
+                        <div class="highlight-box">
+                            <strong>Tren Global Konvergen:</strong> AI, data center, dan energi akan menyatu menjadi satu ekosistem penting.
+                        </div>
+
+                        <p style="margin-top: 1.5rem;"><strong>Solusi Energi yang Dipertimbangkan:</strong></p>
+
+                        <h4 style="margin-top: 1.5rem; color: var(--primary-dark); font-size: 1rem;">Micronuclear Power Plant</h4>
+                        <p>Dianggap paling efisien untuk masa depan data center—output tinggi, footprint kecil, emissi rendah.</p>
+
+                        <h4 style="margin-top: 1rem; color: var(--primary-dark); font-size: 1rem;">Solar Energy</h4>
+                        <p>Potensi besar, namun masih terkendala biaya penyimpanan (battery storage) yang sangat mahal.</p>
+
+                        <div class="highlight-box">
+                            Tantangan: Efisiensi penyimpanan energi surya belum cukup matang untuk baseload konsisten data center.
+                        </div>
+
+                        <h4 style="margin-top: 1.5rem; color: var(--primary-dark); font-size: 1rem;">Geothermal Energy (Energi Panas Bumi)</h4>
+                        <p><strong>Kesempatan Indonesia:</strong> Indonesia memiliki potensi besar di geothermal—sumber energi kontinu yang melimpah di "Ring of Fire".</p>
+
+                        <div class="quote-box">
+                            Geothermal adalah energi renewable yang paling stabil dan efisien untuk mendukung ekosistem AI dan data center jangka panjang.
+                        </div>
+
+                        <p style="margin-top: 1.5rem;"><strong>Strategi DCI:</strong></p>
+                        <div class="list-item">Eksplorasi kemitraan dengan produsen energi lokal</div>
+                        <div class="list-item">Investasi di teknologi efisiensi daya (cooling, management)</div>
+                        <div class="list-item">Positioning sebagai data center energy-efficient di kawasan</div>
+
+                        <p style="margin-top: 1.5rem; font-size: 0.95rem; color: var(--text-light);"><strong>Visi:</strong> Data center masa depan bukan hanya tentang teknologi, tapi tentang sustainability energi yang matang dan local content.</p>
+                    </div>
+                `
+            },
+            {
+                id: 'legacy',
+                icon: '',
+                title: 'Legacy & Generasi Muda',
+                desc: 'Visi pemberdayaan entrepreneur Indonesia',
+                content: `
+                    <div class="section">
+                        <div class="section-number">8</div>
+                        <h3>Legacy dan Harapan untuk Generasi Muda</h3>
+                        
+                        <p><strong>Visi Jangka Panjang:</strong> Tidak ingin meninggalkan konglomerasi besar, tetapi ingin mencetak banyak entrepreneur baru.</p>
+
+                        <div class="highlight-box">
+                            <strong>Filosofi Legacy:</strong> Membimbing mantan karyawan menjadi pengusaha di bidang teknologi.
+                        </div>
+
+                        <p style="margin-top: 1.5rem;"><strong>Program & Inisiatif:</strong></p>
+                        <div class="list-item">Mentoring mantan karyawan untuk memulai bisnis sendiri</div>
+                        <div class="list-item">Berbagi knowledge & network untuk mempercepat startup mereka</div>
+                        <div class="list-item">Investasi angel pada entrepreneur muda yang aligned dengan visi</div>
+
+                        <p style="margin-top: 1.5rem;"><strong>Keyakinan Inti:</strong></p>
+
+                        <div class="quote-box">
+                            "Negara akan lebih stabil kalau punya banyak entrepreneur yang menciptakan value, bukan sekadar mencari uang."
+                        </div>
+
+                        <p style="margin-top: 1.5rem;"><strong>Mengapa Ini Penting?</strong></p>
+                        <div class="list-item">Entrepreneur menciptakan ekosistem berkelanjutan</div>
+                        <div class="list-item">Diversifikasi ekonomi & inovasi meningkat</div>
+                        <div class="list-item">Lapangan kerja & upah yang lebih baik tercipta</div>
+                        <div class="list-item">Stabilitas sosial-ekonomi nasional meningkat</div>
+
+                        <p style="margin-top: 1.5rem;"><strong>Target & Harapan:</strong></p>
+                        <div class="list-item">Dari mantan karyawan DCI, lahir puluhan startup baru</div>
+                        <div class="list-item">Dari startup itu, lebih banyak entrepreneur lagi (multiplier effect)</div>
+                        <div class="list-item">Ekosistem teknologi Indonesia matang & self-sustaining</div>
+
+                        <p style="margin-top: 1.5rem; font-size: 0.95rem; color: var(--text-light);"><strong>Legacy yang Diinginkan:</strong> Bukan aset besar, tetapi ekosistem entrepreneur yang kuat dan berdampak sosial-ekonomi positif.</p>
+                    </div>
+                `
+            },
+            {
+                id: 'salim-group',
+                icon: '',
+                title: 'Inspirasi dari Grup Salim',
+                desc: 'Pembelajaran bisnis berbasis empati & value',
+                content: `
+                    <div class="section">
+                        <div class="section-number">9</div>
+                        <h3>Inspirasi dari Grup Salim (Anthony Salim)</h3>
+                        
+                        <p><strong>Model Bisnis Salim Group:</strong> Belajar dari Salim Group bahwa bisnis harus dimulai dengan empati—melayani kebutuhan dasar banyak orang.</p>
+
+                        <div class="highlight-box">
+                            <strong>Filosofi Salim Group:</strong> Fokus pada low-income market dengan produk bernilai (FMCG)—menjadi fondasi sukses jangka panjang.
+                        </div>
+
+                        <p style="margin-top: 1.5rem;"><strong>Prinsip yang Diterapkan Pak Toto:</strong></p>
+                        <div class="list-item"><strong>Serve the Many, Not the Few:</strong> Infrastruktur digital harus accessible, bukan hanya untuk perusahaan besar</div>
+                        <div class="list-item"><strong>Quality at Scale:</strong> Kualitas tinggi dengan harga kompetitif (bukan premium positioning)</div>
+                        <div class="list-item"><strong>Long-term Value Over Quick Profit:</strong> Relationship dan reputasi adalah aset terbesar</div>
+
+                        <p style="margin-top: 1.5rem;"><strong>Aplikasi di DCI:</strong></p>
+                        <div class="list-item">Menawarkan infrastruktur tier IV dengan pricing rasional</div>
+                        <div class="list-item">Support untuk startup & UKM digital, bukan hanya enterprise</div>
+                        <div class="list-item">Komitmen jangka panjang pada pertumbuhan industri lokal</div>
+
+                        <p style="margin-top: 1.5rem;"><strong>Shift Perspektif:</strong></p>
+
+                        <div class="quote-box">
+                            Dari "How to make money?" menjadi "How to bring value and service?"
+                        </div>
+
+                        <p style="margin-top: 1.5rem;"><strong>Hasil:</strong> Ketika fokus pada value creation masif, uang mengikuti—dan reputation membangun moat bisnis yang kuat.</p>
+
+                        <p style="margin-top: 1.5rem; font-size: 0.95rem; color: var(--text-light);"><strong>Kesimpulan Filosofis:</strong> Sukses bisnis bukan tentang mencari uang; itu tentang melayani kebutuhan banyak orang dengan excellence. Uang adalah hasil natural dari value creation yang konsisten.</p>
+                    </div>
+                `
+            },
+            {
+                id: 'glossary',
+                icon: '',
+                title: 'Glosarium & Terminologi',
+                desc: 'Daftar istilah penting & penjelasan',
+                content: `
+                    <div class="section">
+                        <div class="section-number">G</div>
+                        <h3>Glosarium & Terminologi</h3>
+                        <p>Daftar istilah penting yang digunakan dalam rangkuman ini:</p>
+
+                        <table class="glossary-table">
+                            <thead>
+                                <tr>
+                                    <th>Istilah</th>
+                                    <th>Penjelasan</th>
+                                    <th>Catatan</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="glossary-term">Data Center Tier IV</td>
+                                    <td>Standar data center tertinggi dengan redundansi penuh di semua komponen (power, cooling, network). Uptime 99.995%.</td>
+                                    <td class="glossary-note">DCI adalah tier IV pertama di Asia Tenggara</td>
+                                </tr>
+                                <tr>
+                                    <td class="glossary-term">EBITDA Margin</td>
+                                    <td>Earnings Before Interest, Taxes, Depreciation, Amortization dibagi revenue. Mengukur profitabilitas operasional.</td>
+                                    <td class="glossary-note">DCI: 67% (jauh di atas rata-rata industri)</td>
+                                </tr>
+                                <tr>
+                                    <td class="glossary-term">Net Profit Margin</td>
+                                    <td>Keuntungan bersih setelah semua biaya dibagi revenue. Mengukur profitabilitas total.</td>
+                                    <td class="glossary-note">DCI: 42% (menunjukkan efisiensi luar biasa)</td>
+                                </tr>
+                                <tr>
+                                    <td class="glossary-term">Glassmorphism</td>
+                                    <td>Desain UI dengan efek transparan berkilau, menggunakan backdrop blur. Modern & elegant.</td>
+                                    <td class="glossary-note">Diterapkan di panel & card website ini</td>
+                                </tr>
+                                <tr>
+                                    <td class="glossary-term">IoT (Internet of Things)</td>
+                                    <td>Jaringan perangkat fisik yang terhubung & mengumpulkan data real-time.</td>
+                                    <td class="glossary-note">DCI gunakan untuk monitoring infrastruktur</td>
+                                </tr>
+                                <tr>
+                                    <td class="glossary-term">Kedaulatan Digital</td>
+                                    <td>Kontrol & ownership nasional atas infrastruktur digital, data, dan ekosistem teknologi.</td>
+                                    <td class="glossary-note">Motivasi utama pendirian DCI</td>
+                                </tr>
+                                <tr>
+                                    <td class="glossary-term">Sustainability</td>
+                                    <td>Keberlanjutan bisnis jangka panjang dengan mempertahankan profitabilitas & value creation.</td>
+                                    <td class="glossary-note">Prioritas Pak Toto atas growth instan</td>
+                                </tr>
+                                <tr>
+                                    <td class="glossary-term">Quantum Computing</td>
+                                    <td>Komputer generasi berikutnya menggunakan qubits; mampu memproses masalah kompleks eksponensial lebih cepat.</td>
+                                    <td class="glossary-note">Masih R&D, akan revolutionize encryption</td>
+                                </tr>
+                                <tr>
+                                    <td class="glossary-term">Cryptography (Enkripsi)</td>
+                                    <td>Teknik mengamankan informasi dengan kode matematis. Fondasi keamanan digital modern.</td>
+                                    <td class="glossary-note">Quantum computing akan mengubah ini</td>
+                                </tr>
+                                <tr>
+                                    <td class="glossary-term">Geothermal Energy</td>
+                                    <td>Energi terbarukan dari panas bumi; stabil, sustainable, & efisien untuk baseload power.</td>
+                                    <td class="glossary-note">Potensi besar di Indonesia (Ring of Fire)</td>
+                                </tr>
+                                <tr>
+                                    <td class="glossary-term">Unit Economics</td>
+                                    <td>Analisis revenue vs cost per unit/user untuk mengevaluasi viability bisnis.</td>
+                                    <td class="glossary-note">Banyak startup modern abaikan ini</td>
+                                </tr>
+                                <tr>
+                                    <td class="glossary-term">Entrepreneur Ecosystem</td>
+                                    <td>Jaringan entrepreneur, investor, talent, & resource yang mendukung pertumbuhan startup & inovasi.</td>
+                                    <td class="glossary-note">Vision Pak Toto untuk legacy Indonesia</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <p style="margin-top: 1.5rem; font-size: 0.95rem; color: var(--text-light);"><strong>Catatan:</strong> Glosarium ini mencakup istilah teknis, bisnis, dan konseptual yang penting untuk pemahaman rangkuman ini secara utuh.</p>
+                    </div>
+                `
+            }
+        ];
+
+        // INITIALIZE
+        function init() {
+            renderMenu();
+            document.getElementById('yearDynamic').textContent = new Date().getFullYear();
+            setupEventListeners();
+        }
+
+        function renderMenu() {
+            const grid = document.getElementById('menuGrid');
+            grid.innerHTML = menuData.map((item, idx) => `
+                <div class="menu-card" data-id="${item.id}" onclick="openPanel('${item.id}')">
+                    <span class="menu-icon">${item.icon}</span>
+                    <h3 class="menu-title">${item.title}</h3>
+                    <p class="menu-desc">${item.desc}</p>
+                </div>
+            `).join('');
+        }
+
+        function openPanel(id) {
+            const item = menuData.find(d => d.id === id);
+            if (!item) return;
+
+            document.body.classList.add('panel-open');
+            document.getElementById('panelOverlay').classList.add('active');
+            document.getElementById('contentPanel').classList.add('active');
+            document.getElementById('navDots').classList.add('active');
+
+            document.getElementById('panelIcon').textContent = item.icon;
+            document.getElementById('panelTitle').textContent = item.title;
+            document.getElementById('panelDesc').textContent = item.desc;
+            document.getElementById('panelContent').innerHTML = item.content;
+
+            updateMenuActive(id);
+            updateNavDots(id);
+
+            // Focus management
+            document.getElementById('panelTitle').focus();
+        }
+
+        function closePanel() {
+            document.body.classList.remove('panel-open');
+            document.getElementById('panelOverlay').classList.remove('active');
+            document.getElementById('contentPanel').classList.remove('active');
+            document.getElementById('navDots').classList.remove('active');
+            updateMenuActive(null);
+        }
+
+        function updateMenuActive(id) {
+            document.querySelectorAll('.menu-card').forEach(card => {
+                card.classList.toggle('active', card.dataset.id === id);
+            });
+        }
+
+        function updateNavDots(id) {
+            const dotsContainer = document.getElementById('navDots');
+            const currentIdx = menuData.findIndex(d => d.id === id);
+            
+            dotsContainer.innerHTML = menuData.map((item, idx) => `
+                <div class="nav-dot ${idx === currentIdx ? 'active' : ''}" 
+                     onclick="openPanel('${item.id}')" 
+                     title="${item.title}"></div>
+            `).join('');
+        }
+
+        function scrollPanelTop() {
+            document.getElementById('panelContent').scrollTop = 0;
+        }
+
+        function setupEventListeners() {
+            document.getElementById('panelOverlay').addEventListener('click', closePanel);
+            
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && document.getElementById('contentPanel').classList.contains('active')) {
+                    closePanel();
+                }
+            });
+        }
+
+        // START
+        init();
+    </script>
+
+</body>
+</html>
